@@ -4,7 +4,7 @@ import path from 'path';
 export const getAllUser = async(req, res)=>{
     try {
         const response = await User.findAll();
-        res.json(response)
+        res.json(response);
     } catch (error) {
         console.log(error.message)
     }
@@ -58,8 +58,6 @@ export const createUser = (req, res)=>{
 }
 
 export const changePasswordUser = async(req, res)=>{
-    console.log(req.params.id)
-    console.log(req.body.password)
     const newPassword = req.body.password;
     try {
         await User.update({user_password: newPassword}, {
