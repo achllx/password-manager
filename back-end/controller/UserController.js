@@ -59,7 +59,6 @@ export const getUserByLogin = async(req, res)=>{
 }
 
 export const getUserByFace = async(req, res)=>{
-    console.log(req.body)
     try{
         const user = await User.findOne({
             where: {
@@ -110,10 +109,10 @@ export const createUser = (req, res)=>{
     const fileName = picture.md5 + ext;
     const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
 
-   
+
     const allowType = '.jpeg';
 
-    if(!allowType.includes(ext.toLocaleLowerCase())) return res.status(422).json({msg: 'Invalid Image'});
+    if(!allowType.includes(ext.toLocaleLowerCase())) return res.status(422).json({msg: 'Invalid Image, must be jpeg format'});
     if(fileSize > 5000000) return res.status(422).json({msg: 'Image must be less than 5 MB'});
 
     picture.mv(`./public/images/${fileName}`, async(err)=>{
@@ -121,7 +120,7 @@ export const createUser = (req, res)=>{
 
         try {
             await User.create({
-                user_name: req.body.username, 
+                user_name: req.body.username,
                 user_password: req.body.password,
                 user_email: req.body.email,
                 user_picture: url,
