@@ -3,7 +3,9 @@ import path from 'path';
 
 export const getAllUser = async(req, res)=>{
     try {
-        const response = await User.findAll();
+        const response = await User.findAll({
+            attributes:['user_picture']
+        });
         res.json(response);
     } catch (error) {
         console.log(error.message)
@@ -12,15 +14,76 @@ export const getAllUser = async(req, res)=>{
 
 export const getUserByLogin = async(req, res)=>{
     try {
-        const response = await User.findOne({
+        const user = await User.findOne({
             where: {
                 user_name: req.params.username,
                 user_password: req.params.password
             }
         });
-        res.json(response)
+
+        if(user.user_id){
+            await User.update({islogin: 'true'}, {
+                where:{
+                    user_id: user.user_id
+                }
+            });
+
+            const response = await User.findOne({
+                where: {
+                    user_id : user.user_id
+                }
+            })
+            
+            res.json(response);
+        } else{
+            return res.status(500).json({msg: 'something wrong?!'})
+        }
+
     } catch (error) {
         console.log(error.message)
+    }
+}
+
+export const getUserByFace = async(req, res)=>{
+    console.log(req.body)
+    try{
+        const user = await User.findOne({
+            where: {
+                user_picture: req.body.picture
+            }
+        });
+
+        if(user.user_id){
+            await User.update({islogin: 'true'}, {
+                where: {
+                    user_id: user.user_id
+                }
+            });
+
+            const response = await User.findOne({
+                where: {
+                    user_id: user.user_id
+                }
+            });
+            res.json(response)
+        } else{
+            return res.status(500).json({msg: 'something wrong?!'})
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const logoutUser = async(req, res)=>{
+    try {
+        await User.update({islogin: 'false'}, {
+            where: {
+                user_id: req.params.id
+            }
+        });
+        res.status(200).json({msg: 'User logged out'});
+    } catch(error){
+        console.log(error)
     }
 }
 
@@ -47,7 +110,8 @@ export const createUser = (req, res)=>{
                 user_name: req.body.username, 
                 user_password: req.body.password,
                 user_email: req.body.email,
-                user_picture: url
+                user_picture: url,
+                islogin: 'false'
             });
             res.status(201).json({msg: 'user created successfully'})
         }catch(error) {

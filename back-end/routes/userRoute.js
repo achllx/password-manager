@@ -3,7 +3,9 @@ import {
     getUserByLogin,
     createUser,
     changePasswordUser,
-    getAllUser
+    getAllUser,
+    getUserByFace,
+    logoutUser,
 } from '../controller/UserController.js';
 
 const router = express.Router();
@@ -11,6 +13,8 @@ const router = express.Router();
 router.get('/user', getAllUser);
 router.get('/user/:username/:password', getUserByLogin);
 router.post('/user', createUser);
-router.patch('/update/user/:id', changePasswordUser);
+router.patch('/user/update/:id', changePasswordUser);
+router.patch('/user/face', getUserByFace);
+router.patch('/user/logout/:id', logoutUser);
 
 export default router;

@@ -25,6 +25,9 @@ const User = db.define('user', {
     },
     user_picture: {
         type: DataTypes.STRING(255),
+    },
+    islogin: {
+        type: DataTypes.STRING(255),
     }
 },
 {
