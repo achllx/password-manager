@@ -12,6 +12,20 @@ export const getAllUser = async(req, res)=>{
     }
 }
 
+export const getUserStatus = async(req, res)=>{
+    try {
+        let response = await User.findOne({
+            where:{
+                user_id: req.params.id
+            },
+            attributes: ['islogin']
+        });
+        res.json(response);
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const getUserByLogin = async(req, res)=>{
     try {
         const user = await User.findOne({
