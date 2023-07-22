@@ -26,6 +26,19 @@ export const getUserStatus = async(req, res)=>{
     }
 }
 
+export const getUserById = async(req, res)=>{
+    try {
+        const user = await User.findOne({
+            where:{
+                user_id: this.params.id
+            }
+        });
+        res.json(user);
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const getUserByLogin = async(req, res)=>{
     try {
         const user = await User.findOne({
