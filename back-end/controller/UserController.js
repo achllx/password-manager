@@ -30,7 +30,7 @@ export const getUserById = async(req, res)=>{
     try {
         const user = await User.findOne({
             where:{
-                user_id: this.params.id
+                user_id: req.params.id
             }
         });
         res.json(user);

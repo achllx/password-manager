@@ -11,6 +11,7 @@ export class ApiService {
 
   private readonly apiUrl = 'http://localhost:3000';
 
+  // * User
   loginUser(username: string, userPassword: string): Observable<any>{
     return this._http.get(`${this.apiUrl}/user/${username}/${userPassword}`);
   }
@@ -29,5 +30,27 @@ export class ApiService {
 
   getUserByFace(data: any): Observable<any> {
     return this._http.patch(`${this.apiUrl}/user/face`, data);
+  }
+
+  getUserById(userID: string): Observable<any> {
+    return this._http.get(`${this.apiUrl}/check/user/${userID}`);
+  }
+
+
+  // * App
+  getAppByUserId(userID: string): Observable<any> {
+    return this._http.get(`${this.apiUrl}/app/user/${userID}`);
+  }
+
+  getAppById(appID: string): Observable<any> {
+    return this._http.get(`${this.apiUrl}/app/${appID}`);
+  }
+
+  createApp(data: any): Observable<any> {
+    return this._http.post(`${this.apiUrl}/create/app`, data);
+  }
+
+  updateApp(appID: string, data: any): Observable<any> {
+    return this._http.patch(`${this.apiUrl}/create/update/${appID}`, data);
   }
 }

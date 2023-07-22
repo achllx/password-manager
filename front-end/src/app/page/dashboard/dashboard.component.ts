@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   private id: string = '';
+  username: string = '';
+  imgUrl: string = '';
+  apps: any[] = [];
   
   ngOnInit(): void {
     this.activeRouter.params.subscribe((params) => {
@@ -26,7 +29,19 @@ export class DashboardComponent implements OnInit {
           return;
         }
       });
+
+      this.service.getUserById(this.id).subscribe((res) => {
+        this.username = res.user_name;
+        this.imgUrl = res.user_picture;
+      })
+
+      this.service.getAppByUserId(this.id).subscribe((res) => {
+        for (let i = 0; i < res.length; i++) {
+          this.apps.push(res[i]);
+        }
+      })
     })
   }
+
   
 }

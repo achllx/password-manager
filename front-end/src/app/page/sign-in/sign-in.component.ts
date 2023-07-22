@@ -47,7 +47,6 @@ export class SignInComponent {
         this.userForm.get('username')?.value!,
         this.userForm.get('password')?.value!
       ).subscribe((res) => {
-        console.log(res);
         this.router.navigate([`dashboard/${res.user_id}`]);
       })
     }
