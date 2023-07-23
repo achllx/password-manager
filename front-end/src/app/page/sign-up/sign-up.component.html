@@ -22,8 +22,7 @@
       <input type="text" class="form-control" placeholder="Username" formControlName="username" required>
     </div>
     <div class="password-container mb-3">
-      <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" formControlName="password" placeholder="Password" name="password"
-        required>
+      <input [(ngModel)]="password" [style.border-color]="password !== ''? passValid? 'green' : 'red' : ''" [type]="passwordVisible ? 'text' : 'password'" class="form-control" formControlName="password" placeholder="Password" name="password" (input)="passwordCheck($event)" required>
       <i class="bi bi-eye pointer" (click)="togglePasswordVisibility($event)"></i>
     </div>
     <button type="submit" class="btn btn-primary w-100 mb-3 mt-2" (click)="submitForm()">Create Account</button>

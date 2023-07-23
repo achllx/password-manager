@@ -6,10 +6,14 @@ import { NotFoundComponent } from './page/not-found/not-found.component';
 import { ForgotPassComponent } from './page/forgot-pass/forgot-pass.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { FaceRecognitionComponent } from './page/face-recognition/face-recognition.component';
+import { CardComponent } from './page/dashboard/card/card.component';
 
 const routes: Routes = [
   {
     path: 'dashboard/:id', component: DashboardComponent
+  },
+  {
+    path: 'dashboard/:id/app/:id', component: CardComponent
   },
   {
     path: 'sign-in/forgot-password', component: ForgotPassComponent
@@ -24,7 +28,7 @@ const routes: Routes = [
     path: 'sign-in/face-recognition', component: FaceRecognitionComponent
   },
   {
-    path: '', redirectTo: '/sign-up', pathMatch: 'full'
+    path: '', redirectTo: '/sign-in', pathMatch: 'full'
   },
   {
     path: '**', component: NotFoundComponent

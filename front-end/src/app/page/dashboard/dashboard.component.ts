@@ -23,7 +23,13 @@ export class DashboardComponent implements OnInit {
     this.activeRouter.params.subscribe((params) => {
       this.id = params['id'];
       this.service.getStatus(this.id).subscribe((res) => {
-        if(!res || !res.islogin) {
+        if(res) {
+          if(res.islogin === 'false') {
+            alert('please login properly');
+            this.router.navigate(['sign-in']);
+            return;
+          } 
+        } else {
           alert('please login properly');
           this.router.navigate(['sign-in']);
           return;
@@ -43,5 +49,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  
+  cardPage(appId: string) {
+    this.router.navigate([`dashboard/${this.id}/app/${appId}`])
+  }
 }

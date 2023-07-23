@@ -36,6 +36,9 @@ export class ApiService {
     return this._http.get(`${this.apiUrl}/check/user/${userID}`);
   }
 
+  changeUserPass(data: any): Observable<any> {
+    return this._http.patch(`${this.apiUrl}/update/user`, data);
+  }
 
   // * App
   getAppByUserId(userID: string): Observable<any> {

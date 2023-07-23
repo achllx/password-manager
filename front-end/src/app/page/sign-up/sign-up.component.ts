@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiService } from 'src/app/service/api/api.service';
+import { PassCheckService } from 'src/app/service/pass-check/pass-check.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,10 +20,13 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private passVisible: PasswordVisibleService,
     private service: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private passCheck: PassCheckService
   ) {}
 
   public passwordVisible: boolean = false;
+  passValid: boolean = false;
+  password: string = '';
 
   errormsg: any;
   successmsg: any;
@@ -84,5 +88,9 @@ export class SignUpComponent implements OnInit {
 
   signIn() {
     this.router.navigate(['sign-in']);
+  }
+
+  passwordCheck(event:any) {
+    this.passValid = this.passCheck.checkPasswordStrength(event.target.value);
   }
 }

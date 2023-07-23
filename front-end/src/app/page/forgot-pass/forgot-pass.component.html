@@ -1,11 +1,15 @@
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center sign-page">
     <h1 class="fw-bold fs-5 mb-4">Recovery your account</h1>
     <p class="text-start">Enter the email address asscociated with your account and we'll send you a link tu reset your password.</p>
-    <form class="container">
+    <form class="container" [formGroup]="userForm">
         <div class="d-flex flex-row align-items-center mb-3">
-            <input type="email" class="form-control" placeholder="Email" required/>
+            <input type="email" class="form-control" placeholder="Email" required formControlName="email"/>
         </div>
-        <button type="submit" class="btn btn-primary w-100 mb-3 mt-2">
+        <div class="password-container mb-3">
+            <input [(ngModel)]="password" [style.border-color]="password !== ''? passValid? 'green' : 'red' : ''" [type]="passwordVisible ? 'text' : 'password'" class="form-control" (input)="passwordCheck($event)" placeholder="New Password" name="password" formControlName="password" required>
+            <i class="bi bi-eye pointer" (click)="togglePasswordVisibility($event)"></i>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-3 mt-2" (click)="changePassword()" [disabled]="!passValid">
             Continue
         </button>
         <div class="form-text text-center">

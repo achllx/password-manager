@@ -10,6 +10,7 @@ import { ForgotPassComponent } from './page/forgot-pass/forgot-pass.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FaceRecognitionComponent } from './page/face-recognition/face-recognition.component';
+import { CardComponent } from './page/dashboard/card/card.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FaceRecognitionComponent } from './page/face-recognition/face-recogniti
     NotFoundComponent,
     ForgotPassComponent,
     DashboardComponent,
-    FaceRecognitionComponent
+    FaceRecognitionComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

@@ -149,10 +149,11 @@ export const createUser = (req, res)=>{
 
 export const changePasswordUser = async(req, res)=>{
     const newPassword = req.body.password;
+    console.log(newPassword)    
     try {
         await User.update({user_password: newPassword}, {
             where:{
-                user_id: req.params.id
+                user_email: req.body.email
             }
         });
         res.status(200).json({msg: 'password change'});

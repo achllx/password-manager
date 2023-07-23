@@ -17,7 +17,7 @@ router.get('/user/:username/:password', getUserByLogin);
 router.get('/check/user/:id', getUserById)
 router.get('/login/status/user/:id', getUserStatus)
 router.post('/user', createUser);
-router.patch('/user/update/:id', changePasswordUser);
+router.patch('/update/user', changePasswordUser);
 router.patch('/user/face', getUserByFace);
 router.patch('/user/logout/:id', logoutUser);
 
