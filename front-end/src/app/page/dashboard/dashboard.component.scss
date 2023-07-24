@@ -24,7 +24,7 @@ main {
             gap: 20px;
         }
 
-        @media screen and (max-width: 768px) {
+        c {
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
 
@@ -79,7 +79,7 @@ main {
 
         article {
             background: #fff;
-            box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.48);
+            box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.48);
             padding: 15px;
             border-radius: 15px;
             cursor: pointer;

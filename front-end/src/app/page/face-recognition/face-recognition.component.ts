@@ -17,6 +17,7 @@ export class FaceRecognitionComponent implements OnInit {
   labels: string[] = [];
   username: [] = [];
   message = '';
+  validation: boolean | undefined;
 
   async ngOnInit() {
     this.service.getAllFace().subscribe((res) => {
@@ -100,6 +101,7 @@ export class FaceRecognitionComponent implements OnInit {
       } else {
         if (results[0]._label) {
           const formData = new FormData();
+          this.validation = true;
 
           formData.append('picture', results[0]._label)
 
@@ -119,6 +121,7 @@ export class FaceRecognitionComponent implements OnInit {
                 video.srcObject = stream;
               });
         } else {
+          this.validation = false;
           this.message = 'Face Not Recognized';
         }
       }

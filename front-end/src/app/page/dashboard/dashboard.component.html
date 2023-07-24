@@ -15,6 +15,9 @@
         </div>
     </nav>
     <main class="mt-3">
+        <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-outline-success">Tambah</button>
+        </div>
         <div class="grid">
             <article class="d-flex align-items-center justify-content-between" *ngFor="let app of apps" (click)="cardPage(app.app_id)">
                 <div class="d-flex align-items-center">

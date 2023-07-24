@@ -5,11 +5,14 @@
         <div class="d-flex flex-row align-items-center mb-3">
             <input type="email" class="form-control" placeholder="Email" required formControlName="email"/>
         </div>
-        <div class="password-container mb-3">
+        <div class="password-container">
             <input [(ngModel)]="password" [style.border-color]="password !== ''? passValid? 'green' : 'red' : ''" [type]="passwordVisible ? 'text' : 'password'" class="form-control" (input)="passwordCheck($event)" placeholder="New Password" name="password" formControlName="password" required>
             <i class="bi bi-eye pointer" (click)="togglePasswordVisibility($event)"></i>
         </div>
-        <button type="submit" class="btn btn-primary w-100 mb-3 mt-2" (click)="changePassword()" [disabled]="!passValid">
+        <div class="form-text text-start" [style.display]="password !== ''? passValid? 'none' : 'block' : 'none'" >
+            Panjang password minimal 6, harus mengandung angka, dan mengandung huruf kapital
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-3 mt-4" (click)="changePassword()" [disabled]="!passValid">
             Continue
         </button>
         <div class="form-text text-center">
