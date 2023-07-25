@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PasswordVisibleService } from 'src/app/service/password-visible/password-visible.service';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +18,19 @@ export class DashboardComponent implements OnInit {
     private activeRouter: ActivatedRoute,
     private service: ApiService,
     private router: Router,
+    private fb: FormBuilder,
+    private passVisible: PasswordVisibleService,
   ) {}
 
   private id: string = '';
+  public passwordVisible: boolean = false;
   username: string = '';
   imgUrl: string = '';
   apps: any[] = [];
+  isTambah: boolean = false;
+
+  // @ts-ignore
+  appForm: FormGroup;
   
   ngOnInit(): void {
     this.activeRouter.params.subscribe((params) => {
@@ -47,9 +60,50 @@ export class DashboardComponent implements OnInit {
         }
       })
     })
+
+    this.appForm = this.fb.group({
+      appName: [null, Validators.required],
+      appType: [null, Validators.required],
+      appLink: [null, Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required],
+      email: [null, Validators.required],
+    })
+  }
+
+  submitForm() {
+    if (this.appForm.valid) {
+      const formData = new FormData();
+
+      formData.append('user_id', this.id);
+      formData.append('app_name', this.appForm.get('appName')?.value!);
+      formData.append('app_type', this.appForm.get('appType')?.value!);
+      formData.append('app_link', this.appForm.get('appLink')?.value!);
+      formData.append('app_username', this.appForm.get('username')?.value!);
+      formData.append('app_password', this.appForm.get('password')?.value!);
+      formData.append('app_email', this.appForm.get('email')?.value!);
+
+      this.service.createApp(formData);
+
+      this.router.navigate([`dashboard/${this.id}`]);
+    }
   }
 
   cardPage(appId: string) {
     this.router.navigate([`dashboard/${this.id}/app/${appId}`])
+  }
+
+  tambahApp() {
+    this.isTambah = true;
+  }
+
+  closeTambah() {
+    this.isTambah = false;
+  }
+
+  togglePasswordVisibility(e: Event) {
+    e.stopPropagation();
+    this.passwordVisible = !this.passwordVisible;
+    this.passVisible.changeIcon();
   }
 }

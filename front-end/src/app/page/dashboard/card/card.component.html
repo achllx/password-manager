@@ -1,16 +1,21 @@
 <div class="container-fluid d-flex align-items-center flex-column mt-5">
-    <h3 class="fw-bold mb-3">Nexflix Account</h3>
+    <h3 class="fw-bold mb-3">{{ appName }} Account</h3>
     <div class="d-flex justify-content-center">
         <form>
-            <label class="form-label fw-bold">Username/email address</label>
+            <label class="form-label fw-bold">Username</label>
             <div class="user-container mb-3">
                 <i class="bi bi-envelope"></i>
-                <input type="email" class="form-control" [readonly]="!isEdit" value="Shaby@gmail.com">
+                <input type="text" class="form-control" [readonly]="!isEdit" [value]="username">
+            </div>
+            <label class="form-label fw-bold">Email address</label>
+            <div class="user-container mb-3">
+                <i class="bi bi-envelope"></i>
+                <input type="email" class="form-control" [readonly]="!isEdit" [value]="email">
             </div>
             <label class="form-label fw-bold">Password</label>
             <div class="password-container mb-3">
                 <i class="bi bi-key"></i>
-                <input class="form-control" [type]="passwordVisible ? 'text' : 'password'" placeholder="Password" name="password" value="Password123" [readonly]="!isEdit">
+                <input class="form-control" [type]="passwordVisible ? 'text' : 'password'" placeholder="Password" name="password" [value]="password" [readonly]="!isEdit">
                 <i class="bi bi-eye pointer pass-visible" (click)="togglePasswordVisibility($event)"></i>
             </div>
             <button class="btn btn-primary" [style.display]="isEdit? 'none' : 'block'" (click)="editBtn()">Edit</button>
@@ -20,12 +25,12 @@
         <div>
             <h4 class="fw-bold mb-3">Details</h4>
             <div class="mb-3">
-                <p class="mb-0">Website address</p>
-                <h5 class="fw-bold">Netflix.com</h5>
+                <p class="mb-0">App address</p>
+                <h5 class="fw-bold">{{ webAddress }}</h5>
             </div>
             <div>
                 <p class="mb-0">Update your password in</p>
-                <span class="fw-bold">0 days</span>
+                <span class="fw-bold">{{ updateYourPass() }} days</span>
             </div>
         </div>
     </div>

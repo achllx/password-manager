@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'dashboard/:id', component: DashboardComponent
   },
   {
-    path: 'dashboard/:id/app/:id', component: CardComponent
+    path: 'dashboard/:id/app/:appId', component: CardComponent
   },
   {
     path: 'sign-in/forgot-password', component: ForgotPassComponent
