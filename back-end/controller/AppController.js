@@ -88,3 +88,23 @@ export const updateApp = async(req, res)=>{
         console.log(error.message);
     }
 }
+
+export const deleteApp = async(req,res)=>{
+    const app = App.findOne({
+        where:{
+            app_id: req.params.id
+        }
+    });
+    if(!app) return res.status(404).json({msg: "data not found"});
+
+    try {
+        await App.destroy({
+            where:{
+                app_id: req.params.id
+            }
+        });
+        res.status(200).json({msg: "App list  Deleted Successfully"});
+    } catch (error) {
+        console.log(error.message)
+    }
+}
