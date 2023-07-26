@@ -33,6 +33,11 @@ const App = db.define('app', {
     app_email: {
         type: DataTypes.STRING(255),
         allowNull: true
+    },
+    last_password_change:{
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
     }
 },
 {
