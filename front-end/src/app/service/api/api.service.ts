@@ -40,6 +40,10 @@ export class ApiService {
     return this._http.patch(`${this.apiUrl}/update/user`, data);
   }
 
+  userLogout(userID: string): Observable<any> {
+    return this._http.get(`${this.apiUrl}/logout/user/${userID}`);
+  }
+
   // * App
   getAppByUserId(userID: string): Observable<any> {
     return this._http.get(`${this.apiUrl}/app/user/${userID}`);
@@ -54,6 +58,10 @@ export class ApiService {
   }
 
   updateApp(appID: string, data: any): Observable<any> {
-    return this._http.patch(`${this.apiUrl}/create/update/${appID}`, data);
+    return this._http.patch(`${this.apiUrl}/app/update/${appID}`, data);
+  }
+
+  deleteApp(appID: string): Observable<any> {
+    return this._http.delete(`${this.apiUrl}/delete/app/${appID}`);
   }
 }

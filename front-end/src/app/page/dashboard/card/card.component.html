@@ -1,37 +1,69 @@
-<div class="container-fluid d-flex align-items-center flex-column mt-5">
+<div class="container-fluid d-flex align-items-center flex-column mt-5 mb-5">
     <h3 class="fw-bold mb-3">{{ appName }} Account</h3>
-    <div class="d-flex justify-content-center">
-        <form>
+    <div class="d-flex justify-content-center gap-5">
+        <div class="form">
             <label class="form-label fw-bold">Username</label>
             <div class="user-container mb-3">
                 <i class="bi bi-envelope"></i>
-                <input type="text" class="form-control" [readonly]="!isEdit" [value]="username">
+                <input type="text" class="form-control" [readonly]="!isEdit"  [(ngModel)]="username">
             </div>
             <label class="form-label fw-bold">Email address</label>
             <div class="user-container mb-3">
                 <i class="bi bi-envelope"></i>
-                <input type="email" class="form-control" [readonly]="!isEdit" [value]="email">
+                <input type="email" class="form-control" [readonly]="!isEdit" [(ngModel)]="email">
             </div>
             <label class="form-label fw-bold">Password</label>
             <div class="password-container mb-3">
                 <i class="bi bi-key"></i>
-                <input class="form-control" [type]="passwordVisible ? 'text' : 'password'" placeholder="Password" name="password" [value]="password" [readonly]="!isEdit">
+                <input class="form-control" [type]="passwordVisible ? 'text' : 'password'" placeholder="Password" name="password" [(ngModel)]="password" [readonly]="!isEdit">
                 <i class="bi bi-eye pointer pass-visible" (click)="togglePasswordVisibility($event)"></i>
             </div>
-            <button class="btn btn-primary" [style.display]="isEdit? 'none' : 'block'" (click)="editBtn()">Edit</button>
+            <div [style.display]="isEdit? 'block' : 'none'">
+                <div class="d-flex gap-3 mb-3">
+                    <label class="form-label">App Type</label>
+                    <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"  id="flexRadioDefault1" value="Website" [checked]="checkType('Website')" [(ngModel)]="appType">
+                            <label class="form-check-label">
+                                Website
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"  id="flexRadioDefault2" value="Aplikasi" [checked]="checkType('Aplikasi')" [(ngModel)]="appType">
+                            <label class="form-check-label">
+                                Aplikasi
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">App name</label>
+                    <input type="text" class="form-control" [(ngModel)]="appName" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">App link</label>
+                    <input type="text" class="form-control" [(ngModel)]="webAddress" required>
+                </div>
+            </div>
+            <button class="btn btn-primary" [style.display]="isEdit? 'none' : 'block'" (click)="isEdit = true">Edit</button>
             <button class="btn btn-danger mb-3" [style.display]="isEdit? 'block' : 'none'" (click)="cancelBtn()">Cancel</button>
-            <button type="submit" class="btn btn-primary" [style.display]="isEdit? 'block' : 'none'">Ubah</button>
-        </form>
-        <div>
+            <button type="submit" class="btn btn-primary" [style.display]="isEdit? 'block' : 'none'" (click)="submitForm()">Ubah</button>
+        </div>
+        <div [style.display]="isEdit? 'none' : 'block'">
             <h4 class="fw-bold mb-3">Details</h4>
             <div class="mb-3">
                 <p class="mb-0">App address</p>
                 <h5 class="fw-bold">{{ webAddress }}</h5>
             </div>
+            <div class="mb-3">
+                <p class="mb-0">App Type</p>
+                <h5 class="fw-bold">{{ appType }}</h5>
+            </div>
             <div>
                 <p class="mb-0">Update your password in</p>
                 <span class="fw-bold">{{ updateYourPass() }} days</span>
             </div>
+            <button class="btn btn-danger mt-3" (click)="deleteApp()">Delete App</button>
         </div>
     </div>
 </div>

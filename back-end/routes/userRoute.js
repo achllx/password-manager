@@ -19,6 +19,6 @@ router.get('/login/status/user/:id', getUserStatus)
 router.post('/user', createUser);
 router.patch('/update/user', changePasswordUser);
 router.patch('/user/face', getUserByFace);
-router.patch('/user/logout/:id', logoutUser);
+router.get('/logout/user/:id', logoutUser);
 
 export default router;

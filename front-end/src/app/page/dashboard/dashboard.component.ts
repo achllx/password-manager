@@ -83,22 +83,20 @@ export class DashboardComponent implements OnInit {
       formData.append('app_password', this.appForm.get('password')?.value!);
       formData.append('app_email', this.appForm.get('email')?.value!);
 
-      this.service.createApp(formData);
-
-      this.router.navigate([`dashboard/${this.id}`]);
+      this.service.createApp(formData).subscribe((res) => {
+        window.location.reload();
+      });
     }
+  }
+
+  logout() {
+    this.service.userLogout(this.id).subscribe((res) => {
+      this.router.navigate(['sign-in'])
+    })
   }
 
   cardPage(appId: string) {
     this.router.navigate([`dashboard/${this.id}/app/${appId}`])
-  }
-
-  tambahApp() {
-    this.isTambah = true;
-  }
-
-  closeTambah() {
-    this.isTambah = false;
   }
 
   togglePasswordVisibility(e: Event) {
