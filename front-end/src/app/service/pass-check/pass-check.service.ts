@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class PassCheckService {
   constructor() { }
 
+  // pengecekan dan spesifikasi untuk password strength
   checkPasswordStrength(password: string) {
     const numberPattern = /\d/;
     const uppercasePattern = /[A-Z]/;

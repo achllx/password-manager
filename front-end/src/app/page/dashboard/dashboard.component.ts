@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  // Create App Baru
   submitForm() {
     if (this.appForm.valid) {
       const formData = new FormData();
@@ -89,16 +90,19 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  // logout
   logout() {
     this.service.userLogout(this.id).subscribe((res) => {
       this.router.navigate(['sign-in'])
     })
   }
 
+  // Menuju ke app page
   cardPage(appId: string) {
     this.router.navigate([`dashboard/${this.id}/app/${appId}`])
   }
 
+  // Password Visibility
   togglePasswordVisibility(e: Event) {
     e.stopPropagation();
     this.passwordVisible = !this.passwordVisible;

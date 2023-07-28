@@ -36,6 +36,7 @@ export class FaceRecognitionComponent implements OnInit {
 
   }
 
+  // Menyalakan video tag pada html
   startWebcam(video: any) {
     navigator.mediaDevices
       .getUserMedia({
@@ -50,6 +51,7 @@ export class FaceRecognitionComponent implements OnInit {
       });
   }
 
+  // mendapatkan label/nama untuk deteksi wajah
   getLabeledFaceDescriptions() {
     return Promise.all(
       this.labels.map(async (label) => {
@@ -65,6 +67,7 @@ export class FaceRecognitionComponent implements OnInit {
     );
   }
 
+  // fungsi untuk deteksi wajah
   async faceRecognition(video: any) {
     const labeledFaceDescriptors = await this.getLabeledFaceDescriptions();
     const faceMatcher: any = new faceapi.FaceMatcher(labeledFaceDescriptors);
@@ -128,6 +131,7 @@ export class FaceRecognitionComponent implements OnInit {
     }, 1000);
   }
 
+  // memasukan canvas(tetapi disini canvas visibility nya hide jadi ga kelihatan)
   insertAfter(referenceNode: any, newNode: any) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }

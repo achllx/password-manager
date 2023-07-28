@@ -23,24 +23,29 @@ export class SignInComponent {
 
   public passwordVisible: boolean = false;
 
+  // password visibility
   togglePasswordVisibility(e: Event) {
     e.stopPropagation()
     this.passwordVisible = !this.passwordVisible;
     this.passVisible.changeIcon()
   }
 
+  // navigate ke page forgot-password
   forgotPass() {
     this.router.navigate(['sign-in/forgot-password']);
   }
 
+  // navigate ke page sign-up
   signUp() {
     this.router.navigate(['sign-up']);
   }
 
+  // navigate ke page face-recogn
   faceRecog() {
     this.router.navigate(['sign-in/face-recognition']);
   }
 
+  // proses login
   submitForm() {
     if (this.userForm.valid) {
       this.service.loginUser(

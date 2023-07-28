@@ -28,7 +28,7 @@ export class CardComponent implements OnInit {
   username: string = '';
   password: string = '';
   webAddress: string = '';
-  updateTime: any = '';
+  lastPasswordChange: any = '';
 
   ngOnInit(): void {
     this.activeRouter.params.subscribe((params) => {
@@ -41,11 +41,12 @@ export class CardComponent implements OnInit {
         this.username = res.app_username;
         this.password = res.app_password;
         this.webAddress = res.app_link;
-        this.updateTime = res.updatedAt;
+        this.lastPasswordChange = res.last_password_change;
       });
     });
   }
 
+  // untuk mengedit data app
   submitForm() {
     const formData = new FormData();
 
@@ -61,14 +62,16 @@ export class CardComponent implements OnInit {
     });
   }
 
+  // Menghitung hari untuk update password
   updateYourPass(): number {
-    const futureDate = this.addDaysToDate(this.updateTime, 30);
+    const futureDate = this.addDaysToDate(this.lastPasswordChange, 30);
     const today = new Date();
     const timeDiff = futureDate.getTime() - today.getTime();
     const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
     return daysDiff;
   }
+
 
   addDaysToDate(inputDate: string, daysToAdd: number): Date {
     // Ubah input tanggal menjadi objek Date
@@ -85,16 +88,19 @@ export class CardComponent implements OnInit {
     return futureDateObj;
   }
 
+  // password visibility
   togglePasswordVisibility(e: Event) {
     e.stopPropagation();
     this.passwordVisible = !this.passwordVisible;
     this.passVisible.changeIcon();
   }
 
+  // cancel proses edit
   cancelBtn() {
     window.location.reload();
   }
 
+  // mengisi input radio pada proses edit
   checkType(value: string): boolean {
     if (this.appType == value) {
       return true;
@@ -102,6 +108,7 @@ export class CardComponent implements OnInit {
     return false;
   }
 
+  // Mendelete app
   deleteApp() {
     this.service.deleteApp(this.appId).subscribe((res) => {
       this.router.navigate([`dashboard/${this.userId}`]);

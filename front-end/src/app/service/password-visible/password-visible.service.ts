@@ -7,6 +7,7 @@ export class PasswordVisibleService {
 
   constructor() { }
 
+  // mengubah icon pada input password
   changeIcon() {
     let passIcon = document.querySelector('.password-container>i');
     

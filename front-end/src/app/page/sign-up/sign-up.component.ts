@@ -46,7 +46,7 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-
+  // proses untuk membuat user baru
   submitForm() {
     if (this.userForm.valid) {
       const formData = new FormData();
@@ -80,16 +80,19 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  // password visibility
   togglePasswordVisibility(e: Event) {
     e.stopPropagation();
     this.passwordVisible = !this.passwordVisible;
     this.passVisible.changeIcon();
   }
 
+  // navigate ke page sign-in
   signIn() {
     this.router.navigate(['sign-in']);
   }
 
+  // mengecek password strength
   passwordCheck(event:any) {
     this.passValid = this.passCheck.checkPasswordStrength(event.target.value);
   }

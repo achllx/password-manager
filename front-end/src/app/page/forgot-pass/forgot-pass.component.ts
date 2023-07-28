@@ -27,17 +27,19 @@ export class ForgotPassComponent {
     password: new FormControl('', Validators.required),
   });
 
-
+  // password visibility
   togglePasswordVisibility(e: Event) {
     e.stopPropagation()
     this.passwordVisible = !this.passwordVisible;
     this.passVisible.changeIcon()
   }
 
+  // navigate ke page sign-up
   signUp() {
     this.router.navigate(['sign-up']);
   }
 
+  // mengubah password 
   changePassword() {
     if(this.userForm.valid) {
       const formData = new FormData;
@@ -50,6 +52,7 @@ export class ForgotPassComponent {
     }
   }
 
+  // mengecek password strength
   passwordCheck(event:any) {
     this.passValid = this.passCheck.checkPasswordStrength(event.target.value);
   }
