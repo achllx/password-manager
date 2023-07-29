@@ -16,7 +16,7 @@ export const loginDummy = async(req, res)=>{
                 }
             });
 
-            res.json({url: `http://localhost:4269/dummy/${user.id}`});
+            res.json({url: `http://localhost:4269/dummy/app/${user.id}`});
         }
     } catch(error){
         console.log(error.message)

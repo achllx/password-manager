@@ -72,7 +72,6 @@ export class CardComponent implements OnInit {
     return daysDiff;
   }
 
-
   addDaysToDate(inputDate: string, daysToAdd: number): Date {
     // Ubah input tanggal menjadi objek Date
     const dateParts = inputDate.split('-');

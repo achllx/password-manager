@@ -77,4 +77,8 @@ export class ApiService {
   deleteApp(appID: string): Observable<any> {
     return this._http.delete(`${this.apiUrl}/delete/app/${appID}`);
   }
+
+  navigateToApp(username: string, password: string): Observable<any> {
+    return this._http.get(`http://localhost:4000/dummy/${username}/${password}`)
+  }
 }

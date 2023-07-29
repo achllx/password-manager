@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   imgUrl: string = '';
   apps: any[] = [];
   isTambah: boolean = false;
+  linkToApp: string = '';
 
   // @ts-ignore
   appForm: FormGroup;
@@ -107,5 +108,13 @@ export class DashboardComponent implements OnInit {
     e.stopPropagation();
     this.passwordVisible = !this.passwordVisible;
     this.passVisible.changeIcon();
+  }
+
+  // navigate to app
+  navigateToApp(username: string, password: string, event: any) {
+    this.service.navigateToApp(username, password).subscribe((res) => {
+      window.location.href = res.url;
+    });
+    event.stopPropagation();
   }
 }

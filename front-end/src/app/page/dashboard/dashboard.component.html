@@ -72,7 +72,7 @@
             </form>
         </div>
         <div class="grid">
-            <article class="d-flex align-items-center justify-content-between" *ngFor="let app of apps">
+            <article class="d-flex align-items-center justify-content-between pointer" *ngFor="let app of apps" (click)="cardPage(app.app_id)">
                 <div class="d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                         class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -85,7 +85,7 @@
                         <p class="mb-0">{{ app.app_email }}</p>
                     </div>
                 </div>
-                <i class="bi bi-pencil-square pointer" (click)="cardPage(app.app_id)"></i>
+                <i class="bi bi-box-arrow-up-right pointer" (click)="navigateToApp(app.app_username, app.app_password, $event)"></i>
             </article>
         </div>
     </main>
