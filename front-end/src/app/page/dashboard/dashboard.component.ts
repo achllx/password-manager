@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   apps: any[] = [];
   isTambah: boolean = false;
   linkToApp: string = '';
+  btnValidation: boolean = false;
 
   // @ts-ignore
   appForm: FormGroup;
@@ -88,6 +89,11 @@ export class DashboardComponent implements OnInit {
       this.service.createApp(formData).subscribe((res) => {
         window.location.reload();
       });
+    } else {
+      this.btnValidation = true;
+      setTimeout(() => {
+        this.btnValidation = false;
+      }, 2000);
     }
   }
 

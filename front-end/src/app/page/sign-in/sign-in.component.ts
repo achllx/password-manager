@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/service/api/api.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
   constructor(
@@ -22,12 +22,14 @@ export class SignInComponent {
   });
 
   public passwordVisible: boolean = false;
+  btnValidation: boolean = false;
+  message: string = '';
 
   // password visibility
   togglePasswordVisibility(e: Event) {
-    e.stopPropagation()
+    e.stopPropagation();
     this.passwordVisible = !this.passwordVisible;
-    this.passVisible.changeIcon()
+    this.passVisible.changeIcon();
   }
 
   // navigate ke page forgot-password
@@ -48,12 +50,28 @@ export class SignInComponent {
   // proses login
   submitForm() {
     if (this.userForm.valid) {
-      this.service.loginUser(
-        this.userForm.get('username')?.value!,
-        this.userForm.get('password')?.value!
-      ).subscribe((res) => {
-        this.router.navigate([`dashboard/${res.user_id}`]);
-      })
+      this.service
+        .loginUser(
+          this.userForm.get('username')?.value!,
+          this.userForm.get('password')?.value!
+        )
+        .subscribe((res) => {
+          if (res === null) {
+            this.message = 'Username dan password tidak valid';
+            this.btnValidation = true;
+            setTimeout(() => {
+              this.btnValidation = false;
+            }, 2000);
+          } else {
+            this.router.navigate([`dashboard/${res.user_id}`]);
+          }
+        });
+    } else {
+      this.message = 'All field are required';
+      this.btnValidation = true;
+      setTimeout(() => {
+        this.btnValidation = false;
+      }, 2000);
     }
   }
 }

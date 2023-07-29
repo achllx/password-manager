@@ -29,6 +29,7 @@ export class CardComponent implements OnInit {
   password: string = '';
   webAddress: string = '';
   lastPasswordChange: any = '';
+  btnValidation: boolean = false;
 
   ngOnInit(): void {
     this.activeRouter.params.subscribe((params) => {
@@ -50,16 +51,23 @@ export class CardComponent implements OnInit {
   submitForm() {
     const formData = new FormData();
 
-    formData.append('name', this.appName);
-    formData.append('type', this.appType);
-    formData.append('link', this.webAddress);
-    formData.append('username', this.username);
-    formData.append('password', this.password);
-    formData.append('email', this.email);
-
-    this.service.updateApp(this.appId, formData).subscribe((res) => {
-      window.location.reload();
-    });
+    if (this.appName && this.appType && this.webAddress && this.username && this.password && this.email) {
+      formData.append('name', this.appName);
+      formData.append('type', this.appType);
+      formData.append('link', this.webAddress);
+      formData.append('username', this.username);
+      formData.append('password', this.password);
+      formData.append('email', this.email);
+  
+      this.service.updateApp(this.appId, formData).subscribe((res) => {
+        window.location.reload();
+      });
+    } else {
+      this.btnValidation = true;
+      setTimeout(() => {
+        this.btnValidation = false;
+      }, 2000);
+    }
   }
 
   // Menghitung hari untuk update password

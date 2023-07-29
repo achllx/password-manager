@@ -9,6 +9,9 @@
   </div>
   <p class="fw-bold fs-5">Create your account here!</p>
   <form class="container" [formGroup]="userForm">
+    <div class="alert alert-danger w-100 p-3" role="alert" [style.display]="btnValidation? 'block' : 'none'">
+      All field are required
+    </div>
     <div>
       <input class="form-control" type="file" accept=".jpeg" formControlName="file" #fileInput>
     </div>
@@ -22,13 +25,16 @@
       <input type="text" class="form-control" placeholder="Username" formControlName="username" required>
     </div>
     <div class="password-container">
-      <input [(ngModel)]="password" [style.border-color]="password !== ''? passValid? 'green' : 'red' : ''" [type]="passwordVisible ? 'text' : 'password'" class="form-control" formControlName="password" placeholder="Password" name="password" (input)="passwordCheck($event)" required>
+      <input [(ngModel)]="password" [style.border-color]="password !== ''? passValid? 'green' : 'red' : ''"
+        [type]="passwordVisible ? 'text' : 'password'" class="form-control" formControlName="password"
+        placeholder="Password" name="password" (input)="passwordCheck($event)" required>
       <i class="bi bi-eye pointer" (click)="togglePasswordVisibility($event)"></i>
     </div>
-    <div class="form-text text-start" [style.display]="password !== ''? passValid? 'none' : 'block' : 'none'" >
+    <div class="form-text text-start" [style.display]="password !== ''? passValid? 'none' : 'block' : 'none'">
       Panjang password minimal 6, harus mengandung angka, dan mengandung huruf kapital
     </div>
-    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4" (click)="submitForm()" [disabled]="!passValid">Create Account</button>
+    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4" (click)="submitForm()" [disabled]="!passValid">Create
+      Account</button>
     <div class="form-text text-center">Already have an account? <span (click)="signIn()"
         class="link fw-bold pointer">Sign in</span></div>
   </form>

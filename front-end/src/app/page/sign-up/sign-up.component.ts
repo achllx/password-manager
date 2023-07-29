@@ -27,9 +27,7 @@ export class SignUpComponent implements OnInit {
   public passwordVisible: boolean = false;
   passValid: boolean = false;
   password: string = '';
-
-  errormsg: any;
-  successmsg: any;
+  btnValidation: boolean = false;
 
   // @ts-ignore
   userForm: FormGroup;
@@ -63,20 +61,16 @@ export class SignUpComponent implements OnInit {
       
       this.service.regisUser(formData).subscribe((res) => {
         if (res.status !== 200) {
-          this.successmsg = '';
-          // return (this.errormsg = res.message);
           console.log(res);          
         }
-        // this.successmsg = res.msg;
-        // this.errormsg = '';
       });
 
       this.router.navigate(['sign-in']);
     } else {
-      console.log();
-      
-      // this.errormsg = 'All Field is Required !';
-      // this.successmsg = '';
+      this.btnValidation = true;
+      setTimeout(() => {
+        this.btnValidation = false;
+      }, 2000);
     }
   }
 

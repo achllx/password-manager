@@ -21,6 +21,7 @@ export class ForgotPassComponent {
   public passwordVisible: boolean = false;
   passValid: boolean = false;
   password: string = '';
+  btnValidation: boolean = false;
 
   userForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -49,6 +50,11 @@ export class ForgotPassComponent {
       this.service.changeUserPass(formData).subscribe((res) => {
         this.router.navigate(['sign-in']);
       })
+    } else {
+      this.btnValidation = true;
+      setTimeout(() => {
+        this.btnValidation = false;
+      }, 2000);
     }
   }
 
