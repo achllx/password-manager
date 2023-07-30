@@ -2,6 +2,7 @@ import App from "../models/app.js";
 import User from "../models/user.js";
 import moment from "moment-timezone";
 
+// get all app
 export const getAllApp = async (req, res) => {
     try {
         const response = await App.findAll();
@@ -11,6 +12,7 @@ export const getAllApp = async (req, res) => {
     }
 };
 
+// get app by id
 export const getAppById = async (req, res) => {
     try {
         const response = await App.findOne({
@@ -24,6 +26,7 @@ export const getAppById = async (req, res) => {
     }
 };
 
+// get all app from user with id ..
 export const getAppByUserId = async (req, res) => {
     try {
         const response = await App.findAll({
@@ -37,6 +40,7 @@ export const getAppByUserId = async (req, res) => {
     }
 };
 
+// create or write new app list to the database
 export const createApp = async (req, res) => {
     try {
         const user = await User.findOne({
@@ -62,6 +66,7 @@ export const createApp = async (req, res) => {
     }
 };
 
+// update app with current id
 export const updateApp = async (req, res) => {
 
     const currentDate = moment().tz("Asia/Jakarta").format("YYYY-MM-DD");
@@ -119,6 +124,7 @@ export const updateApp = async (req, res) => {
     }
 };
 
+// deleting / drop app from the database
 export const deleteApp = async (req, res) => {
     const app = App.findOne({
         where: {

@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import path from 'path';
 
+// getting all user picture for face recognition train data.
 export const getAllUser = async (req, res) => {
     try {
         const response = await User.findAll({
@@ -12,6 +13,7 @@ export const getAllUser = async (req, res) => {
     }
 }
 
+// get the user current status.
 export const getUserStatus = async (req, res) => {
     try {
         let response = await User.findOne({
@@ -26,6 +28,7 @@ export const getUserStatus = async (req, res) => {
     }
 }
 
+// getting user data by id
 export const getUserById = async (req, res) => {
     try {
         const user = await User.findOne({
@@ -39,6 +42,7 @@ export const getUserById = async (req, res) => {
     }
 }
 
+// change user status login 
 export const getUserByLogin = async (req, res) => {
     const user = await User.findOne({
         where: {
@@ -71,6 +75,7 @@ export const getUserByLogin = async (req, res) => {
     }
 }
 
+//  login by face recog
 export const getUserByFace = async (req, res) => {
     try {
         const user = await User.findOne({
@@ -100,6 +105,7 @@ export const getUserByFace = async (req, res) => {
     }
 }
 
+//  logout user an change login status
 export const logoutUser = async (req, res) => {
     try {
         await User.update({ islogin: 'false' }, {
@@ -113,6 +119,7 @@ export const logoutUser = async (req, res) => {
     }
 }
 
+//  create new user profile
 export const createUser = (req, res) => {
     if (req.files === null) return res.status(400).json({ msg: 'No File Uploaded' });
 
@@ -147,6 +154,7 @@ export const createUser = (req, res) => {
 
 }
 
+// change user password
 export const changePasswordUser = async (req, res) => {
     const newPassword = req.body.password;
     console.log(newPassword)
