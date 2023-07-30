@@ -106,10 +106,9 @@ export class FaceRecognitionComponent implements OnInit {
           const formData = new FormData();
           this.validation = true;
 
-          formData.append('picture', results[0]._label)
+          formData.append('picture', results[0]._label);
 
           this.service.getUserByFace(formData).subscribe((res) => {
-            console.log(res);
             this.router.navigate([`dashboard/${res.user_id}`]);
           })
 
